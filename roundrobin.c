@@ -41,13 +41,13 @@ void ttime(pro p[], int n)
 void schedule(pro p[], int n, int tq)
 {
     int completed = 0, k = 0, time = p[0].at, cur, len = 0, ctime[20], pid[20], rqueue[20], f = 0, r = -1;
-    r = (r + 1) % n;
-    rqueue[r] = 0;
-    pid[0] = 0;
+    r = (r + 1) % n;     //Enqueue in Circular queue
+    rqueue[r] = 0;       // Pushing 1st element to queue
+    pid[0] = 0;          // Initializing
     while (completed != n)
     {
         cur = rqueue[f]; // Front element of ready queue
-        f = (f + 1) % n;
+        f = (f + 1) % n; // Dequeue
 
         if (p[cur].rt == -1) // Response time
             p[cur].rt = time - p[cur].at;
@@ -78,7 +78,7 @@ void schedule(pro p[], int n, int tq)
         {
             if (p[i].at > time || p[i].bt == 0 || p[i].flag == 1)
                 continue;
-            r = (r + 1) % n;
+            r = (r + 1) % n;  //enqueue
             rqueue[r] = i;
             p[i].flag = 1;
         }
@@ -87,7 +87,7 @@ void schedule(pro p[], int n, int tq)
             completed++;
         else
         {
-            r = (r + 1) % n;
+            r = (r + 1) % n;   //enqueue
             rqueue[r] = cur;
         }
     }
